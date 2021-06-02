@@ -14,7 +14,45 @@
 <div id="lyrics"></div>
 
 <script>
-	// Complete this section and create a CSS file named style.css
+	lyrics[0] = "Lisa:<br>\
+		Come gather round, children,<br>\
+		It's high time ye learned<br>\
+		'Bout a hero named Homer<br>\
+		And a devil named Burns.";
+	lyrics[1] = "We'll march 'till we drop <br>\
+		The girls and the fellas.<br>\
+		We'll fight 'till the death <br>\
+		Or else fold like umbrellas.";
+	lyrics[2] = "So we'll march day and night<br>\
+		By the big cooling tower.<br>\
+		They have the plant";
+	lyrics[3] = "But we have the power.";
+	lyrics[4] = "Lenny:<br>\
+		Now do \"Classical Gas!\"";
+	lyrics[5] = "So we'll march day and night<br>\
+		By the big cooling tower.<br>\
+		They have the plant";
+	lyrics[6] = "But we have the power.";
+
+	annotation = document.getElementById("lyrics");
+	video = document.getElementById("butwehavethepower");
+	video.addEventListener('timeupdate', function(event) {
+		curr = video.currentTime;
+		if (6 < curr && curr < 16) annotation.innerHTML = lyrics[0];
+		else if (16 < curr && curr < 27) annotation.innerHTML = lyrics[1];
+		else if (38 < curr && curr < 45) annotation.innerHTML = lyrics[2];
+		else if (45 < curr && curr < 50) annotation.innerHTML = lyrics[3];
+		else if (52.6 < curr && curr < 55) annotation.innerHTML = lyrics[4];
+		else if (53 < curr && curr < 55) annotation.innerHTML = lyrics[5];
+		else if (72.5 < curr && curr < 79.5) annotation.innerHTML = lyrics[2];
+		else if (79.5 < curr && curr < 81) annotation.innerHTML = lyrics[3];
+		else if (82 < curr && curr < 89) annotation.innerHTML = lyrics[2];
+		else if (89 < curr && curr < 91.5) annotation.innerHTML = lyrics[3];
+		else annotation.innerHTML = "...";
+	});
+
+	
+	
 </script>
 </body>
 </html>	
