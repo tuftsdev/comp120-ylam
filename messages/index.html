@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Messages</title>
+  <script>
+    function loadMessages() {
+      jsonData = '[{"id":1,"content":"Do you really want to hurt me?","username":"Boy"},\
+                   {"id":2,"content":"Do you really want to make me cry?","username":"George"}]';
+      jsonObj = JSON.parse(jsonData);
+      messages = document.getElementById("messages");
+      jsonObj.forEach(element => {
+          message = document.createTextNode(element["content"] + " " + element["username"]);
+          newElement = document.createElement("P");
+          newElement.appendChild(message);
+          messages.appendChild(newElement)
+
+      });
+    }
+  </script>
+</head>
+
+<body onload="loadMessages()">
+  <h1>Messages</h1>
+  <div id="messages"></div>
+</body>
+
+</html>
