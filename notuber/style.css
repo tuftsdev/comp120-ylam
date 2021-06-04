@@ -10,13 +10,3 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
-#car {
-    width: 30px;
-    height: 70px;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    background-image: url("car.png");
-    background-repeat: no-repeat;
-}
