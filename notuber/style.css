@@ -14,7 +14,9 @@ html, body {
 #car {
     width: 30px;
     height: 70px;
-    position: relative;
+    top: 50%;
+    left: 50%;
+    position: absolute;
     background-image: url("car.png");
     background-repeat: no-repeat;
 }
