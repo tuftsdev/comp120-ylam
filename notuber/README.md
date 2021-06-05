@@ -12,4 +12,5 @@ All Work Is My Own
 ## Optimization
 
 **Before optimization**: 1.34s loading time and 6.4kB data transferred
+
 **After optimization**: 1.1 loading time and 6.4kB data transferred
