@@ -36,13 +36,6 @@ function initMap() {
                         map: map,
                         icon: "./car.png"
                     }));
-                    // carMarker.addListener("click", (c) => {
-                    //     d = distance(myLatLng, c.latLng);
-                    //     car_infowindow = new google.maps.InfoWindow({
-                    //         content: `<h2>Vehicle</h2><ul><li>username: ${car['username']}<li>ID: ${car['id']}<li>Distance: ${d} miles</ul>`
-                    //     });
-                    //     car_infowindow.open(map, );
-                    // });
                 });
                 carMarkers.map((marker, i) => {
                     google.maps.event.addListener(marker, 'click', function() {
