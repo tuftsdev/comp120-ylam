@@ -24,15 +24,10 @@ All Work Is My Own
 - Send POST request to ride-hailing API, retrieve information of all the vehicles
 - Dynamically mark all the vehicles on the map
 - Dynamically change infowindow's content that displays the information of the closest car to user upon clicking the marker of user's location
+- Go beyond: show popup infowindow noting how far away the vehicle if from user, upon clicking the vehicle
 
 ## Collaboration
 All Work Is My Own
 
 ## Hours
-4 hour
-
-## Optimization
-
-**Before optimization**: 1.34s loading time and 6.4kB data transferred
-
-**After optimization**: 1.1 loading time and 6.3kB data transferred
+5 hour
