@@ -4,25 +4,28 @@ var shortestDistance = Infinity;
 var carMarkers = [];
 var cars;
 var closestCar;
+var infowindow;
 
 distance = (a, b) => (google.maps.geometry.spherical.computeDistanceBetween(a, b)/1609.344).toString();
 
 function initMap() {
+    infowindow = new google.maps.InfoWindow();
     navigator.geolocation.getCurrentPosition(myCoord => {
         myLatLng = new google.maps.LatLng({lat: myCoord.coords.latitude, lng: myCoord.coords.longitude});
         map = new google.maps.Map(document.getElementById("map"), {
             center: myLatLng,
-            zoom: 2,
+            zoom: 14,
             minZoom: 1
         });
 
         const myMarker = new google.maps.Marker({
             position: myLatLng,
-            map: map
+            map: map,
+            icon: "https://img.icons8.com/cute-clipart/64/000000/home.png"
         });
 
-        request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
+        vehicle_request = new XMLHttpRequest();
+        vehicle_request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 cars = JSON.parse(this.response);
                 cars.map(car => {
@@ -48,18 +51,18 @@ function initMap() {
                 })
             }
         }
-        request.open('POST', 'https://jordan-marsh.herokuapp.com/rides', true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("username=JPgy9YNN&lat="+myCoord.coords.latitude+"&lng="+myCoord.coords.longitude);
+        vehicle_request.open('POST', 'https://jordan-marsh.herokuapp.com/rides', true);
+        vehicle_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        vehicle_request.send("username=JPgy9YNN&lat="+myCoord.coords.latitude+"&lng="+myCoord.coords.longitude);
 
-        const infowindow = new google.maps.InfoWindow({
+        const meInfowindow = new google.maps.InfoWindow({
             content: "NA",
         });
         
         myMarker.addListener("click", () => {
             if (closestCar != undefined) {
                 htmlContent = `<h2>Closest Vehicle</h2><ul><li>username: ${closestCar['username']}<li>ID: ${closestCar['id']}<li>Distance: ${(shortestDistance/1609.344).toString()} miles</ul>`;
-                infowindow.setContent(htmlContent);
+                meInfowindow.setContent(htmlContent);
 
                 const path = new google.maps.Polyline({
                     path: [myLatLng, {lat: closestCar['lat'], lng: closestCar['lng']}],
@@ -70,8 +73,35 @@ function initMap() {
                 });
                 path.setMap(map);
             }
-            infowindow.open(map, myMarker);
+            meInfowindow.open(map, myMarker);
+        });
+
+        const food_request = {
+            location: myLatLng,
+            radius: 1609.344,
+            type: ["restaurant", "bar", "cafe"],
+          };
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(food_request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+                results.map(result => {
+                    console.log(result['name']);
+                    createMarker(result);
+                });
+            }
         });
     });
     
 }
+
+function createMarker(place) {
+    if (!map || !myLatLng || !place.geometry || !place.geometry.location) return;
+    const marker = new google.maps.Marker({
+      map,
+      position: place.geometry.location,
+    });
+    google.maps.event.addListener(marker, "click", () => {
+      infowindow.setContent(place['name']);
+      infowindow.open(map, marker);
+    });
+  }
