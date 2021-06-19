@@ -85,7 +85,6 @@ function initMap() {
         service.nearbySearch(food_request, (results, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK && results) {
                 results.map(result => {
-                    console.log(result);
                     createMarker(result);
                 });
             }
