@@ -85,7 +85,7 @@ function initMap() {
         service.nearbySearch(food_request, (results, status) => {
             if (status === google.maps.places.PlacesServiceStatus.OK && results) {
                 results.map(result => {
-                    console.log(result['name']);
+                    console.log(result);
                     createMarker(result);
                 });
             }
@@ -101,7 +101,8 @@ function createMarker(place) {
       position: place.geometry.location,
     });
     google.maps.event.addListener(marker, "click", () => {
-      infowindow.setContent(place['name']);
+      content =  `<h2>Place</h2><ul><li>Name: ${place['name']}<li>Distance: ${distance(myLatLng, place.geometry.location)} miles</ul>`
+      infowindow.setContent(content);
       infowindow.open(map, marker);
     });
   }
