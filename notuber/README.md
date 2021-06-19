@@ -21,9 +21,10 @@ All Work Is My Own
 
 ### Work Done
 - Add a marker sitting at user's location using navigator.geolocation
-- Send POST request to ride-hailing API, retrieve information of all the vehicles
-- Dynamically mark all the vehicles on the map
-- Dynamically change infowindow's content that displays the information of the closest car to user upon clicking the marker of user's location
+- Send POST request to ride-hailing API, retrieve information of all the vehicles in JSON file
+- Upon receiving the JSON file,
+    - Dynamically mark all the vehicles on the map
+    - Add event listener that shows a infowindow displaying the information of the closest car to the user upon clicking the marker of user's location
 - Go beyond: 
     - Show popup infowindow for nearby restaurants, bars, coffee shops within 1 mile from user's location, upon clicking the places
         - Mark with place's name and distance to user
