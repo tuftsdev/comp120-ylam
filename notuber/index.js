@@ -79,7 +79,7 @@ function initMap() {
         const food_request = {
             location: myLatLng,
             radius: 1609.344,
-            type: ["restaurant", "bar", "cafe"],
+            type: ["restaurant"],
           };
         service = new google.maps.places.PlacesService(map);
         service.nearbySearch(food_request, (results, status) => {
