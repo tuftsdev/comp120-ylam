@@ -17,7 +17,6 @@ function initMap() {
             zoom: 14,
             minZoom: 1
         });
-
         const myMarker = new google.maps.Marker({
             position: myLatLng,
             map: map,
@@ -29,13 +28,13 @@ function initMap() {
             if (this.readyState == 4 && this.status == 200) {
                 cars = JSON.parse(this.response);
                 cars.map(car => {
-                    d = google.maps.geometry.spherical.computeDistanceBetween(myLatLng, new google.maps.LatLng({lat: car['lat'], lng: car['lng']}));
+                    d = google.maps.geometry.spherical.computeDistanceBetween(myLatLng, new google.maps.LatLng({lat: parseFloat(car['lat']), lng: parseFloat(car['lng'])}));
                     if (d < shortestDistance) {
                         closestCar = car;
                         shortestDistance = d;
                     }
                     carMarkers.push(new google.maps.Marker({
-                        position: {lat: car['lat'], lng: car['lng']},
+                        position: {lat: parseFloat(car['lat']), lng: parseFloat(car['lng'])},
                         map: map,
                         icon: "./car.png"
                     }));
@@ -51,7 +50,7 @@ function initMap() {
                 })
             }
         }
-        vehicle_request.open('POST', 'https://jordan-marsh.herokuapp.com/rides', true);
+        vehicle_request.open('POST', 'https://sleepy-eyrie-89343.herokuapp.com/rides', true);
         vehicle_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         vehicle_request.send("username=JPgy9YNN&lat="+myCoord.coords.latitude+"&lng="+myCoord.coords.longitude);
 
@@ -63,9 +62,8 @@ function initMap() {
             if (closestCar != undefined) {
                 htmlContent = `<h2>Closest Vehicle</h2><ul><li>username: ${closestCar['username']}<li>ID: ${closestCar['id']}<li>Distance: ${(shortestDistance/1609.344).toString()} miles</ul>`;
                 meInfowindow.setContent(htmlContent);
-
                 const path = new google.maps.Polyline({
-                    path: [myLatLng, {lat: closestCar['lat'], lng: closestCar['lng']}],
+                    path: [{lat: myLatLng.lat(), lng: myLatLng.lng()}, {lat: parseFloat(closestCar['lat']), lng: parseFloat(closestCar['lng'])}],
                     geodesic: true,
                     strokeColor: "#FF0000",
                     strokeOpacity: 1.0,
