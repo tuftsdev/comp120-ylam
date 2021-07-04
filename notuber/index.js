@@ -52,7 +52,7 @@ function initMap() {
         }
         vehicle_request.open('POST', 'https://sleepy-eyrie-89343.herokuapp.com/rides', true);
         vehicle_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        vehicle_request.send("username=JPgy9YNN&lat="+myCoord.coords.latitude+"&lng="+myCoord.coords.longitude);
+        vehicle_request.send("username=aDifferentUsername&lat="+myCoord.coords.latitude+"&lng="+myCoord.coords.longitude);
 
         const meInfowindow = new google.maps.InfoWindow({
             content: "NA",

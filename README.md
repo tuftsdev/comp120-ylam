@@ -5,3 +5,4 @@
 - Lab 7: [Messages Part 1](https://github.com/tuftsdev/comp120-ylam/tree/main/messages)
 - Lab 8: [The Ride-Hailing Service Part 1](https://github.com/tuftsdev/comp120-ylam/tree/main/notuber)
 - Lab 10: [The Ride-Hailing Service Part 2](https://github.com/tuftsdev/comp120-ylam/tree/main/notuber)
+- Lab 12: [The Ride-Hailing Service Part 3](https://sleepy-eyrie-89343.herokuapp.com/)
