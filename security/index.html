@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <title>
-    </title>
+    <title>Security and Privacy Assessment</title>
     <body>
-        
+        <h1>Security and Privacy Assessment of <i>Ride-Hailing Service</i></h2>
+        <h2>Introduction</h3>
+        <h2>Methodology</h3>
+        <h2>Abstract of Findings</h3>
+            <ul>
+                <li>Database Injection</li>
+                <li>Cross-site Scripting</li>
+            </ul>
+        <h2>Issues Found</h3>
+            <ol>
+                <li>Database injection at /passenger.json
+                    <ul>
+                        <li>Severity: medium => all passengers' data are leaked, no sensitive though</li>
+                        <li>https://jordan-marsh.herokuapp.com/passenger.json?username=%27%20or%20%271%27=%271</li>
+                        <li><img src="1.png"></li>
+                    </ul>
+                </li>
+                <li>Database injection at /vehicle.json
+                    <ul>
+                        <li>Severity: medium => all vehicles' data are leaked, no sensitive though</li>
+                        <li>https://jordan-marsh.herokuapp.com/vehicle.json?username=%27%20or%20%271%27=%271</li>
+                        <li><img src="2.png"></li>
+                    </ul>
+                </li>
+                <li>Cross-site Scripting at /rides
+                    <ul>
+                        <li>Severity: high => the index page is taken control and the alert pop-up keeps showing</li>
+                        <li>Description: by sending the data below into passenger's database while cheking in, the index page is inserted the scrip that keeps poping up the alert window</li>
+                        <li><img src="4.png"></li>
+                    </ul>
+                </li>
+            </ol>
+        <h2>Conclusion</h3>
     </body>
 </html>
