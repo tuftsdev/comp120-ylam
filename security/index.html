@@ -4,36 +4,40 @@
     <body>
         <h1>Security and Privacy Assessment of <i>Ride-Hailing Service</i></h2>
         <h2>Introduction</h3>
+            To assess the security and privacy of Ride-Hailing Service, I exploited the website after reviewing the source code server-vuln.js.
         <h2>Methodology</h3>
+            The website is lacking validation of user's input, so I tried to hack into the website by sending data with the purposes of Database Injection and Cross-site Scripting.
         <h2>Abstract of Findings</h3>
-            <ul>
-                <li>Database Injection</li>
-                <li>Cross-site Scripting</li>
-            </ul>
+            The website can be easily injected in malicious scripts and the privacy of passengers and vehilces are leaked. User's input validation/sanitization is in urgent need!
         <h2>Issues Found</h3>
             <ol>
                 <li>Database injection at /passenger.json
                     <ul>
                         <li>Severity: medium => all passengers' data are leaked, no sensitive though</li>
                         <li>https://jordan-marsh.herokuapp.com/passenger.json?username=%27%20or%20%271%27=%271</li>
-                        <li><img src="1.png"></li>
+                        <li><img src="1.png" width="70%"></li>
+                        <li>Resolution: Escape whitespaces, '\', '/', '=' and quotations. <br>Pseudo-code: <code>username = Array.from(username, c => (c in [" ", "'", '"', "\\", "\/", "="]) ? c : "").join("")</code>
                     </ul>
                 </li>
                 <li>Database injection at /vehicle.json
                     <ul>
                         <li>Severity: medium => all vehicles' data are leaked, no sensitive though</li>
                         <li>https://jordan-marsh.herokuapp.com/vehicle.json?username=%27%20or%20%271%27=%271</li>
-                        <li><img src="2.png"></li>
+                        <li><img src="2.png" width="70%"></li>
+                        <li>Resolution: Escape whitespaces, '\', '/', '=' and quotations. <br>Pseudo-code: <code>username = Array.from(username, c => (c in [" ", "'", '"', "\\", "\/", "="]) ? c : "").join("")</code>
                     </ul>
                 </li>
                 <li>Cross-site Scripting at /rides
                     <ul>
-                        <li>Severity: high => the index page is taken control and the alert pop-up keeps showing</li>
+                        <li>Severity: high => the index page is taken control by an alert window that keeps showing</li>
                         <li>Description: by sending the data below into passenger's database while cheking in, the index page is inserted the scrip that keeps poping up the alert window</li>
-                        <li><img src="4.png"></li>
+                        <li><img src="4.png" height="20%"></li>
+                        <li>Result: Nothing can be loaded because of the annoying alert window. <img src="3.png" width="70%"></li>
+                        <li>Resolution: For example, username should be only consist of letters and numbers with maximum length of 10.</li>Pseudo-code: <code>if ((username).some(characher => characher in ['<', '>', '\', '/', '?']) || username.length > 10) { throws error; } else{ ... }</code></li>
                     </ul>
                 </li>
             </ol>
         <h2>Conclusion</h3>
+            <p>Maintainer of the Ride-Hailing Service should make an effort to make constraint on what user's input is allowed. The easy way to do this is to use ORM that uses object-oriented programming language for database manipulation instead of SQL, which helps escaping SQL injection, and a front-end framework that escapes Cross-site Scripting by design.</p>
     </body>
 </html>

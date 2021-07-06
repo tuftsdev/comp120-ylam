@@ -6,3 +6,4 @@
 - Lab 8: [The Ride-Hailing Service Part 1](https://github.com/tuftsdev/comp120-ylam/tree/main/notuber)
 - Lab 10: [The Ride-Hailing Service Part 2](https://github.com/tuftsdev/comp120-ylam/tree/main/notuber)
 - Lab 12: [The Ride-Hailing Service Part 3](https://sleepy-eyrie-89343.herokuapp.com/)
+- Lab 13: [Security and Privacy Assessment of Ride-Hailing Service](https://github.com/tuftsdev/comp120-ylam/tree/main/security)
